@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.usmanejaz.cgpa_calculator.CGPA.calculator;
 
 import java.util.ArrayList;
 
@@ -32,78 +33,35 @@ public class MainActivity extends AppCompatActivity {
     EditText course, grade;
     TextView name;
     LinearLayout ll;
-    Double gpatotal =10.0;
-    Double chtotal =3.0;
-    Double resultValue =0.0;
-    Button clear, clearAll;
+    Button clearAll;
     @SuppressLint({"ResourceType", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
 
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        // Hide support action bar //
+            getSupportActionBar().hide();
+
+        calculator cal = new calculator();
+
 
         Button btn = (Button)findViewById(R.id.b1);
         TextView val = (TextView)findViewById(R.id.result);
         btn.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
-
-                if(i == 10) {
-                    Snackbar.make(view, "Max course limit reached", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-                else {
-                    addButton();
-                }
+                isError(view);
             }
 
         });
 
         Button result = findViewById(R.id.r1);
         result.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
 
-                int index = 0;
-                EditText gpa1, ch1;
-                Double gpa = 0.0;
-                Double ch = 0.0;
-                for (int k = 1; k <i; k++){
-
-                    gpa1 = findViewById(k);
-                    ch1 = findViewById(k+20);
-                    double gpaDouble;
-                    double chDouble;
-                    String text2 = ch1.getText().toString();
-                    String text = gpa1.getText().toString();
-                    if(text.equals("")) gpaDouble =0.0;
-                    else gpaDouble = Double.parseDouble(text);
-
-                    double gpaVal = findGrade(gpaDouble);
-
-                    if(text2.equals("")) chDouble=0.0;
-                    else chDouble = Double.parseDouble(text2);
-
-                    gpa += (gpaVal*chDouble);
-                    ch += chDouble;
-                }
-
-                Double CGPA = gpa/ch;
-
+             double CGPA = calculateCGPA();
                 val.setText(""+String.format("%.2f",CGPA));
             }
         });
@@ -178,41 +136,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public double findGrade(double num){
 
-        double grade = 0.0;
+    public void isError(View view){
+        if(i == 10) {
+            calculator cal = new calculator();
+            cal.errormsg(view);
+        }
+        else {
+            addButton();
+        }
+    }
 
-        if(num >= 85){
-            grade = 4.0;
+    public double calculateCGPA(){
+
+        EditText gpa1, ch1;
+        Double gpa = 0.0;
+        Double ch = 0.0;
+        for (int k = 1; k <i; k++){
+
+            gpa1 = findViewById(k);
+            ch1 = findViewById(k+20);
+            double gpaDouble;
+            double chDouble;
+            String text2 = ch1.getText().toString();
+            String text = gpa1.getText().toString();
+            if(text.equals("")) gpaDouble =0.0;
+            else gpaDouble = Double.parseDouble(text);
+
+            calculator cal = new calculator();
+            double gpaVal = cal.findGrade(gpaDouble);
+
+            if(text2.equals("")) chDouble=0.0;
+            else chDouble = Double.parseDouble(text2);
+
+            gpa += (gpaVal*chDouble);
+            ch += chDouble;
         }
-        else if(num < 85 && num >= 80){
-            grade = 3.7;
-        }
-        else if(num < 80 && num >=75){
-            grade = 3.3;
-        }
-        else if(num <75 && num >= 70){
-            grade = 3.0;
-        }
-        else if(num < 70 && num >=65){
-            grade = 2.7;
-        }
-        else if(num < 65 && num >=60){
-            grade = 2.3;
-        }
-        else if(num < 60 && num >=58){
-            grade = 2.0;
-        }
-        else if(num < 58 && num >= 55){
-            grade = 1.7;
-        }
-        else if(num < 55 && num >=50){
-            grade = 1.0;
-        }
-        else{
-            grade = 0.0;
-        }
-        return grade;
+
+        Double CGPA = gpa/ch;
+        return CGPA;
+
     }
 }
 
