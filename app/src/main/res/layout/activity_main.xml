@@ -57,16 +57,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Courses"
-                android:textSize="28dp"
                 android:textColor="#355e3b"
+                android:textSize="28dp"
                 app:layout_constraintBottom_toTopOf="@+id/scrollView2"
                 app:layout_constraintEnd_toStartOf="@+id/b1"
                 app:layout_constraintHorizontal_bias="0.628"
@@ -103,43 +103,41 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:id="@+id/save"
                         android:textAlignment="viewStart">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Courses: "
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#355e3b"
-                        android:layout_marginTop="15px"
-                        android:layout_marginBottom="15px"
-                        android:layout_marginRight="15px"
-                        android:paddingRight="5px"
-                        />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="15px"
+                            android:layout_marginRight="15px"
+                            android:layout_marginBottom="15px"
+                            android:gravity="center"
+                            android:paddingRight="5px"
+                            android:text="Courses: "
                             android:textColor="#355e3b"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15px"
+                            android:gravity="center"
                             android:text="Grade:"
+                            android:textColor="#355e3b"
                             android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:layout_margin="15px"
-                            />
+                            android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#355e3b"
-                            android:text="Credits: "
-                            android:textSize="20dp"
-                            android:gravity="center"
-                            android:textStyle="bold"
                             android:layout_margin="15px"
-                            />
+                            android:gravity="center"
+                            android:text="Credits: "
+                            android:textColor="#355e3b"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -160,6 +158,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/clear"
+                android:background="@drawable/add_button"
+                android:text="C"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+                app:layout_constraintEnd_toStartOf="@+id/b1"
+                app:layout_constraintHorizontal_bias="0.813"
+                app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.571" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/b1"

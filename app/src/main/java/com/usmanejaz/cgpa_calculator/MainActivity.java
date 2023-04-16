@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Double gpatotal =10.0;
     Double chtotal =3.0;
     Double resultValue =0.0;
+    Button clear, clearAll;
     @SuppressLint({"ResourceType", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +106,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout layout = findViewById(R.id.ll);
+        LinearLayout save = findViewById(R.id.save);
+        clearAll = findViewById(R.id.clear);
+        clearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i = 1;
+                layout.removeAllViews();
+                layout.addView(save);
+            }
+        });
+
 
     }
 
     public void addButton() {
         LinearLayout layout = (LinearLayout)findViewById(R.id.ll);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(15,15,15,15);
+        params.setMargins(10,10,10,10);
 
 
 
@@ -129,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
       //  course.setGravity(View.TEXT_ALIGNMENT_GRAVITY);
 
         name.setPadding(5,0 , 5, 5);
-
 
         name.setText("Course" + i);
         name.setTextSize(20);
@@ -152,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
 
         i++;
         j++;
+
+
+
 
         ll.addView(name);
         ll.addView(course);
