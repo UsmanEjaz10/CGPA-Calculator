@@ -83,18 +83,25 @@ public class MainActivity extends AppCompatActivity {
 
                     gpa1 = findViewById(k);
                     ch1 = findViewById(k+20);
+                    double gpaDouble;
+                    double chDouble;
                     String text2 = ch1.getText().toString();
                     String text = gpa1.getText().toString();
-                    double gpaDouble = Double.parseDouble(text);
-                    double chDouble = Double.parseDouble(text2);
+                    if(text.equals("")) gpaDouble =0.0;
+                    else gpaDouble = Double.parseDouble(text);
 
-                    gpa += (gpaDouble*chDouble);
+                    double gpaVal = findGrade(gpaDouble);
+
+                    if(text2.equals("")) chDouble=0.0;
+                    else chDouble = Double.parseDouble(text2);
+
+                    gpa += (gpaVal*chDouble);
                     ch += chDouble;
                 }
 
                 Double CGPA = gpa/ch;
 
-                val.setText("GPA = " + CGPA);
+                val.setText(""+String.format("%.2f",CGPA));
             }
         });
 
@@ -104,11 +111,15 @@ public class MainActivity extends AppCompatActivity {
     public void addButton() {
         LinearLayout layout = (LinearLayout)findViewById(R.id.ll);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(20,20,20,20);
+        params.setMargins(15,15,15,15);
+
 
 
         ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setBackground(getResources().getDrawable(R.drawable.ll_border));
+        ll.setPadding(5,5,5,5);
+        ll.setLayoutParams(params);
         name = new TextView(this);
         course = new EditText(this);
         grade = new EditText(this);
@@ -123,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         name.setText("Course" + i);
         name.setTextSize(20);
 
-        course.setHint("GPA");
+        course.setHint("/100");
         course.setTextSize(20);
 
         grade.setHint("Credit hrs.");
@@ -133,15 +144,58 @@ public class MainActivity extends AppCompatActivity {
         course.setLayoutParams(params);
         grade.setLayoutParams(params);
 
+        name.setTextColor(Color.parseColor("#355e3b"));
+        name.setBackgroundColor(Color.parseColor("#d8e4bc"));
+
         grade.setId(j);
         course.setId(i);
+
         i++;
         j++;
+
         ll.addView(name);
         ll.addView(course);
         ll.addView(grade);
+
         layout.addView(ll);
 
+    }
+
+    public double findGrade(double num){
+
+        double grade = 0.0;
+
+        if(num >= 85){
+            grade = 4.0;
+        }
+        else if(num < 85 && num >= 80){
+            grade = 3.7;
+        }
+        else if(num < 80 && num >=75){
+            grade = 3.3;
+        }
+        else if(num <75 && num >= 70){
+            grade = 3.0;
+        }
+        else if(num < 70 && num >=65){
+            grade = 2.7;
+        }
+        else if(num < 65 && num >=60){
+            grade = 2.3;
+        }
+        else if(num < 60 && num >=58){
+            grade = 2.0;
+        }
+        else if(num < 58 && num >= 55){
+            grade = 1.7;
+        }
+        else if(num < 55 && num >=50){
+            grade = 1.0;
+        }
+        else{
+            grade = 0.0;
+        }
+        return grade;
     }
 }
 
